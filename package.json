@@ -1,41 +1,70 @@
 {
-  "name": "pdfjs",
-  "author": {
-    "name": "Markus Ast",
-    "email": "npm.m@rkusa.st"
-  },
-  "version": "0.5.4",
-  "homepage": "https://github.com/rkusa/pdfjs",
-  "description": "A Portable Document Format (PDF) generation library targeting both the server- and client-side.",
-  "keywords": [
-    "pdf",
-    "generator"
-  ],
-  "license": "MIT",
-  "main": "lib/document",
-  "scripts": {
-    "test": "mocha",
-    "prepublish": "npm run-script bundle",
-    "bundle": "browserify lib/document.js --standalone Pdfjs --detect-globals false  > pdfjs.js && npm run-script minify",
-    "minify": "uglifyjs --source-map pdfjs.min.map -o pdfjs.min.js pdfjs.js"
-  },
-  "dependencies": {
-    "base-64": "^0.1.0",
-    "ttfjs": "0.2.x",
-    "node-uuid": "^1.4.1"
-  },
-  "devDependencies": {
-    "browserify": "2.x.x",
-    "chai": "1.8.x",
-    "mocha": "1.13.x",
-    "uglify-js": "2.x.x"
-  },
-  "bugs": "https://github.com/rkusa/pdfjs/issues",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/rkusa/pdfjs.git"
-  },
-  "engines": {
-    "node": ">=0.8"
-  }
+    "name": "pdfjs",
+    "author": {
+        "name": "Markus Ast",
+        "email": "npm.m@rkusa.st"
+    },
+    "version": "0.5.4",
+    "homepage": "https://github.com/rkusa/pdfjs",
+    "description": "A Portable Document Format (PDF) generation library targeting both the server- and client-side.",
+    "keywords": [
+        "pdf",
+        "generator"
+    ],
+    "license": "MIT",
+    "main": "lib/document",
+    "scripts": {
+        "test": "mocha",
+        "prepublish": "npm run-script bundle",
+        "bundle": "browserify lib/document.js --standalone Pdfjs --detect-globals false  > pdfjs.js && npm run-script minify",
+        "minify": "uglifyjs --source-map pdfjs.min.map -o pdfjs.min.js pdfjs.js",
+        "compile-libcontenttextjs": "babel lib\\content\\text.js -o lib\\content\\text.js --require babel-polyfill --presets env",
+        "compile-libdocumentjs": "babel lib\\document.js -o lib\\document.js --require babel-polyfill --presets env",
+        "compile-libfontjs": "babel lib\\font.js -o lib\\font.js --require babel-polyfill --presets env",
+        "compile-libfragmentjs": "babel lib\\fragment.js -o lib\\fragment.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libobjectsdictionaryjs": "babel lib\\objects\\dictionary.js -o lib\\objects\\dictionary.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libobjectsnamejs": "babel lib\\objects\\name.js -o lib\\objects\\name.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libobjectsobjectjs": "babel lib\\objects\\object.js -o lib\\objects\\object.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libobjectsstreamjs": "babel lib\\objects\\stream.js -o lib\\objects\\stream.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libobjectsstringjs": "babel lib\\objects\\string.js -o lib\\objects\\string.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libpagejs": "babel lib\\page.js -o lib\\page.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libcontentimagejs": "babel lib\\content\\image.js -o lib\\content\\image.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libcontentoperationjs": "babel lib\\content\\operation.js -o lib\\content\\operation.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libcontenttablejs": "babel lib\\content\\table.js -o lib\\content\\table.js --require babel-polyfill --presets env",
+        "compile-libfontsttfjs": "babel lib\\fonts\\ttf.js -o lib\\fonts\\ttf.js --require babel-polyfill --presets env",
+        "compile-libimagejs": "babel lib\\image.js -o lib\\image.js --require babel-polyfill --presets env",
+        "compile-libobjectsarrayjs": "babel lib\\objects\\array.js -o lib\\objects\\array.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libobjectsreferencejs": "babel lib\\objects\\reference.js -o lib\\objects\\reference.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libobjectsxobjectjs": "babel lib\\objects\\xobject.js -o lib\\objects\\xobject.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libpagesjs": "babel lib\\pages.js -o lib\\pages.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-libutilsjs": "babel lib\\utils.js -o lib\\utils.js --require babel-polyfill --presets es2015-without-strict",
+        "compile-1_script": "npm run compile-libcontenttextjs && npm run compile-libdocumentjs && npm run compile-libfontjs && npm run compile-libfragmentjs && npm run compile-libobjectsdictionaryjs && npm run compile-libobjectsnamejs && npm run compile-libobjectsobjectjs && npm run compile-libobjectsstreamjs && npm run compile-libobjectsstringjs && npm run compile-libpagejs && npm run compile-libcontentimagejs && npm run compile-libcontentoperationjs && npm run compile-libcontenttablejs && npm run compile-libfontsttfjs && npm run compile-libimagejs && npm run compile-libobjectsarrayjs && npm run compile-libobjectsreferencejs && npm run compile-libobjectsxobjectjs && npm run compile-libpagesjs && npm run compile-libutilsjs",
+        "compile": "npm run compile-1_script"
+    },
+    "dependencies": {
+        "base-64": "^0.1.0",
+        "ttfjs": "0.2.x",
+        "node-uuid": "^1.4.1"
+    },
+    "devDependencies": {
+        "browserify": "2.x.x",
+        "chai": "1.8.x",
+        "mocha": "1.13.x",
+        "uglify-js": "2.x.x",
+        "babel-cli": "latest",
+        "babel-core": "latest",
+        "babel-plugin-add-module-exports": "latest",
+        "babel-plugin-transform-es2015-modules-commonjs": "latest",
+        "babel-polyfill": "latest",
+        "babel-preset-env": "latest",
+        "babel-preset-es2015-without-strict": "latest"
+    },
+    "bugs": "https://github.com/rkusa/pdfjs/issues",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/rkusa/pdfjs.git"
+    },
+    "engines": {
+        "node": ">=0.8"
+    }
 }
